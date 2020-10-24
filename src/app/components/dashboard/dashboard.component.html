@@ -2,7 +2,7 @@
     <div class="mdl-cell mdl-cell--12-col" *ngIf="!stocks" style="text-align: center;">
         Ładowanie
     </div>
-    <div class="dl-cell cdl-cell--3-col" style="margin:20px;" *ngFor="let stock of stocks">
-        <summary [stock]="stock"></summary>
+    <div class="dl-cell cdl-cell--3-col card" style="margin:20px;" *ngFor="let stock of stocks; index as i">
+        <summary [stock]="stock" *delay="i*200" cardHover></summary>
     </div>
 </div>

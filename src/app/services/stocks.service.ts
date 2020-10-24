@@ -11,17 +11,21 @@ export interface StockInterface {
   change: number;
   changeInPercent: number;
 }
+export interface NewsInterface {
+  url: string;
+  title: string;
+}
 
 @Injectable()
 export class StocksService {
 
   constructor(private http: HttpClient) { }
-//getting stock
+  //getting stock
   get() {
     return stocks.slice();
   }
   //adding stock
-  add(stock){
+  add(stock) {
     stocks.push(stock);
     return this.get();
   }
@@ -32,8 +36,11 @@ export class StocksService {
   }
   //loading records from API
   load(symbols) {
-    if(symbols) {
+    if (symbols) {
       return this.http.get<Array<StockInterface>>(service + '/stocks/snapshot?symbols=' + symbols.join());
     }
+  }
+  getNewsSnapshot(source = 'the-wall-street-journal') {
+    return this.http.get<NewsInterface>(service + '/stocks/news/snapshot?source=' + source);
   }
 }
